@@ -43,6 +43,12 @@ if grep -q "^MODE=none" "$CONFIG_DIR/nut.conf" 2>/dev/null; then
     sed -i 's/^MODE=.*/MODE=netserver/' "$CONFIG_DIR/nut.conf"
 fi
 
+# 3.5️⃣ 确保 upsd 有 LISTEN
+if ! grep -q "^LISTEN" "$CONFIG_DIR/upsd.conf" 2>/dev/null; then
+    echo "Adding default LISTEN 0.0.0.0 3493"
+    echo "LISTEN 0.0.0.0 3493" >> "$CONFIG_DIR/upsd.conf"
+fi
+
 # 4️⃣ 权限修复
 chmod 640 "$CONFIG_DIR"/*.conf 2>/dev/null || true
 chmod 640 "$CONFIG_DIR"/upsd.users 2>/dev/null || true
