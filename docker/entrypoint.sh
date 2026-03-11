@@ -27,7 +27,7 @@ if [ -z "$(ls -A "$CONFIG_DIR" 2>/dev/null)" ]; then
 fi
 
 # 2️⃣ 确保核心配置存在
-for f in nut.conf ups.conf upsd.conf; do
+for f in nut.conf ups.conf upsd.conf upsd.users; do
     if [ ! -f "$CONFIG_DIR/$f" ]; then
         sample="$DEFAULT_DIR/$f.sample"
         if [ -f "$sample" ]; then
