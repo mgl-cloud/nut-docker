@@ -50,7 +50,9 @@ COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh \
     && mkdir -p /var/run/nut /var/state/nut /etc/nut/conf.d /usr/share/nut/default-config \
-    && cp -a /etc/nut/. /usr/share/nut/default-config/
+    && cp -a /etc/nut/. /usr/share/nut/default-config/ && mkdir -p /var/run/nut
+
+
 
 VOLUME ["/etc/nut", "/var/run/nut", "/var/state/nut"]
 
