@@ -2,6 +2,8 @@
 
 用于运行 [NUT (Network UPS Tools)](https://networkupstools.org/) 的轻量 Docker 镜像。
 
+> 当前 Dockerfile 基于 **Alpine** 多阶段构建，并从 NUT 官方发布源代码（GitHub 官方 release）编译安装，默认版本可通过构建参数 `NUT_VERSION` 覆盖。
+
 ## 可用镜像
 
 - Docker Hub：`mgle/nut:latest`
@@ -167,6 +169,9 @@ docker compose down
 
 ```bash
 docker build -t nut:local .
+
+# 指定 NUT 版本（例如）
+docker build --build-arg NUT_VERSION=2.8.4 -t nut:local .
 
 docker run -d \
   --name nut-local \
