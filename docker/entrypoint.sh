@@ -10,6 +10,11 @@ mkdir -p "$CONFIG_DIR" "$STATE_DIR" "$RUN_DIR"
 
 echo "Initializing NUT configuration..."
 
+if ! id -u nut >/dev/null 2>&1; then
+    addgroup -S nut
+    adduser -S -G nut -H -h /var/lib/nut nut
+fi
+
 # 1️⃣ 如果配置目录为空，用 sample 初始化
 if [ -z "$(ls -A "$CONFIG_DIR" 2>/dev/null)" ]; then
     echo "First start detected, installing sample configuration..."
@@ -54,6 +59,6 @@ chmod 640 "$CONFIG_DIR"/*.conf 2>/dev/null || true
 chmod 640 "$CONFIG_DIR"/upsd.users 2>/dev/null || true
 chmod 750 "$STATE_DIR" "$RUN_DIR"
 
-echo "Starting NUT: $*"
+echo "NUT initialization complete. Mode: ${MODE:-custom}. Starting: $*"
 
 exec "$@"
