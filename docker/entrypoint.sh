@@ -8,6 +8,8 @@ RUN_DIR=/var/run/nut
 
 mkdir -p "$CONFIG_DIR" "$STATE_DIR" "$RUN_DIR"
 
+export NUT_QUIET_INIT_UPSNOTIFY=true
+
 echo "Initializing NUT configuration..."
 
 if ! id -u nut >/dev/null 2>&1; then
