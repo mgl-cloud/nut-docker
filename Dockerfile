@@ -59,4 +59,4 @@ VOLUME ["/etc/nut", "/var/run/nut", "/var/state/nut"]
 EXPOSE 3493
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
-CMD ["sh", "-c", "upsdrvctl start && upsd -D & exec upsmon -D"]
+CMD ["sh", "-c", "upsdrvctl start && upsd -D & sleep 5 && exec upsmon -D"]
